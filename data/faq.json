@@ -1,0 +1,99 @@
+
+[
+  {
+    "id": "FAQ001",
+    "category": "requirements",
+    "question": "What are the admission requirements?",
+    "answer": "New students must submit a completed application form, a PSA birth certificate copy, recent report card or transcript of records, two ID photos, and a valid government-issued ID if available."
+  },
+  {
+    "id": "FAQ002",
+    "category": "requirements",
+    "question": "How do I apply for admission?",
+    "answer": "Complete the admission application form, prepare the required documents, and submit them to the Admissions Office for evaluation."
+  },
+  {
+    "id": "FAQ003",
+    "category": "requirements",
+    "question": "Can I enroll without my original documents?",
+    "answer": "Submit the available documents and ask the Admissions Office whether temporary or alternative documents can be accepted. Final approval depends on the college."
+  },
+  {
+    "id": "FAQ004",
+    "category": "requirements",
+    "question": "Pwede bang late ipasa ang requirements?",
+    "answer": "Please contact the Admissions Office to ask whether late submission is allowed. Acceptance depends on the college's current enrollment rules."
+  },
+  {
+    "id": "FAQ005",
+    "category": "schedule",
+    "question": "When does enrollment start?",
+    "answer": "The official enrollment dates have not been provided in this helpdesk knowledge base. Please contact the Registrar's Office for the current schedule."
+  },
+  {
+    "id": "FAQ006",
+    "category": "schedule",
+    "question": "What are the office hours?",
+    "answer": "Office hours have not been specified in this knowledge base. Please contact the relevant college office to confirm its current operating hours."
+  },
+  {
+    "id": "FAQ007",
+    "category": "schedule",
+    "question": "May pasok ba sa Saturday?",
+    "answer": "Saturday class and office schedules have not been confirmed. Please contact the college or your department for the current schedule."
+  },
+  {
+    "id": "FAQ008",
+    "category": "payment",
+    "question": "How much is the enrollment fee?",
+    "answer": "The current enrollment fee has not been specified in this knowledge base. Contact the Finance Office for the official amount and payment breakdown."
+  },
+  {
+    "id": "FAQ009",
+    "category": "payment",
+    "question": "What payment methods are accepted?",
+    "answer": "Accepted payment methods have not been specified here. Please contact the Finance Office to confirm available payment options."
+  },
+  {
+    "id": "FAQ010",
+    "category": "payment",
+    "question": "Can I pay in installments?",
+    "answer": "Installment arrangements have not been confirmed. Ask the Finance Office whether a payment plan is available for your program."
+  },
+  {
+    "id": "FAQ011",
+    "category": "scholarship",
+    "question": "Are scholarships available?",
+    "answer": "Scholarship availability and eligibility requirements have not been specified in this knowledge base. Contact the Scholarship Office for current opportunities."
+  },
+  {
+    "id": "FAQ012",
+    "category": "scholarship",
+    "question": "How do I apply for a scholarship?",
+    "answer": "Contact the Scholarship Office to obtain the application procedure, required documents, eligibility rules, and deadlines."
+  },
+  {
+    "id": "FAQ013",
+    "category": "scholarship",
+    "question": "May scholarship ba para sa honor students?",
+    "answer": "Scholarships for honor students have not been confirmed in this knowledge base. Ask the Scholarship Office about academic scholarships and their requirements."
+  },
+  {
+    "id": "FAQ014",
+    "category": "registrar",
+    "question": "How can I request my transcript of records?",
+    "answer": "Submit a transcript request to the Registrar's Office and follow its instructions for identification, processing time, and applicable fees."
+  },
+  {
+    "id": "FAQ015",
+    "category": "registrar",
+    "question": "How do I get a certificate of enrollment?",
+    "answer": "Request a certificate of enrollment from the Registrar's Office. Confirm the required documents, processing time, and fees with the office."
+  },
+  {
+    "id": "FAQ016",
+    "category": "registrar",
+    "question": "Paano magpa-correct ng pangalan sa school records?",
+    "answer": "Contact the Registrar's Office and ask for the official correction procedure and supporting legal documents required."
+  }
+]

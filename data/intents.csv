@@ -1,0 +1,68 @@
+question,intent
+"What documents do I need to enroll?",requirements
+"What are the admission requirements?",requirements
+"Do I need my birth certificate?",requirements
+"How can I apply for admission?",requirements
+"Can I submit my report card later?",requirements
+"Ano ang mga requirements sa enrollment?",requirements
+"Anong documents ang kailangan ko?",requirements
+"Paano mag-apply sa college?",requirements
+"Kailangan ba ng birth certificate?",requirements
+"Pwede bang late ipasa ang requirements?",requirements
+"When does enrollment begin?",schedule
+"What is the enrollment deadline?",schedule
+"What time does the registrar open?",schedule
+"When is the last day to enroll?",schedule
+"Are offices open on Saturday?",schedule
+"Kailan ang simula ng enrollment?",schedule
+"Hanggang kailan ang enrollment?",schedule
+"Anong oras bukas ang registrar?",schedule
+"May pasok ba sa Saturday?",schedule
+"Kailan ang deadline ng enrollment?",schedule
+"How much is the tuition fee?",payment
+"What are the enrollment fees?",payment
+"Can I pay my tuition in installments?",payment
+"What payment methods are accepted?",payment
+"Where can I pay my school fees?",payment
+"Magkano ang tuition fee?",payment
+"Saan ako magbabayad ng tuition?",payment
+"Pwede bang installment ang bayad?",payment
+"Ano ang payment methods na available?",payment
+"Magkano ang enrollment fee?",payment
+"Are scholarships available?",scholarship
+"How do I apply for financial aid?",scholarship
+"What are the scholarship requirements?",scholarship
+"Can honor students get scholarships?",scholarship
+"When is the scholarship application deadline?",scholarship
+"May scholarship ba ang college?",scholarship
+"Paano mag-apply ng scholarship?",scholarship
+"May scholarship ba para sa honor students?",scholarship
+"Ano ang requirements para sa scholarship?",scholarship
+"Kailan ang deadline ng scholarship application?",scholarship
+"How can I request my transcript?",registrar
+"How do I get a certificate of enrollment?",registrar
+"How can I correct my name in school records?",registrar
+"Where do I request my student records?",registrar
+"How long does a transcript request take?",registrar
+"Paano kumuha ng transcript of records?",registrar
+"Saan kukuha ng certificate of enrollment?",registrar
+"Paano magpa-correct ng pangalan sa records?",registrar
+"Saan ako magre-request ng school records?",registrar
+"Paano mag-request ng transcript?",registrar
+"What documents are needed for admission?","requirements"
+"Which school records must I submit to enroll?","requirements"
+"Do freshmen need to submit a transcript?","requirements"
+"What papers should I prepare before enrollment?","requirements"
+"Can I submit my report card after applying?","requirements"
+"What is the tuition payment process?","payment"
+"Where is the cashier for tuition payments?","payment"
+"Can I pay my school fees at the cashier?","payment"
+"How much do I need to pay for enrollment?","payment"
+"Is there a down payment for tuition?","payment"
+"Where can I apply for a scholarship?","scholarship"
+"What financial aid programs does the college offer?","scholarship"
+"What documents are required for scholarship applications?","scholarship"
+"Can I get financial assistance for my studies?","scholarship"
+"Saan ako mag-a-apply para sa scholarship?","scholarship"
+"What documents must new students submit for admission?","requirements"
+"What are the registrar office hours?","schedule"

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayanihan College | Enrollment Helpdesk</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #172033;
+        }
+
+        .app {
+            width: min(760px, 100%);
+            margin: 0 auto;
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #153e75;
+            color: white;
+            padding: 22px 20px;
+        }
+
+        header h1 { margin: 0 0 6px; font-size: 21px; }
+        header p { margin: 0; font-size: 14px; opacity: .9; }
+
+        #messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            min-height: 350px;
+        }
+
+        .message {
+            max-width: 88%;
+            padding: 13px 15px;
+            margin-bottom: 15px;
+            border-radius: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .bot {
+            background: #edf2f7;
+            border-bottom-left-radius: 4px;
+        }
+
+        .user {
+            background: #dbeafe;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+
+        .references {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #526178;
+        }
+
+        .feedback {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .feedback button {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        .feedback button:disabled { opacity: .6; cursor: default; }
+
+        .composer {
+            padding: 15px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+        }
+
+        #question {
+            flex: 1;
+            min-width: 0;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        #send {
+            border: 0;
+            border-radius: 10px;
+            padding: 0 20px;
+            background: #153e75;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #send:disabled { opacity: .6; cursor: wait; }
+
+        .hint {
+            padding: 0 16px 14px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            header { padding: 18px 15px; }
+            #messages { padding: 15px; }
+            .message { max-width: 95%; }
+            .composer { padding: 10px; }
+            #send { padding: 0 14px; }
+        }
+    </style>
+</head>
+<body>
+    <main class="app">
+        <header>
+            <h1>Bayanihan College</h1>
+            <p>Enrollment Helpdesk · Enrollment questions in English or Filipino</p>
+        </header>
+
+        <section id="messages" aria-live="polite">
+            <div class="message bot">
+                Hello! Welcome to Bayanihan College's Enrollment Helpdesk.
+                How can I help you today? You may ask in English, Filipino or Taglish.
+            </div>
+        </section>
+
+        <div class="composer">
+            <input id="question" type="text" maxlength="500"
+                   placeholder="Ask an enrollment question..."
+                   aria-label="Your question">
+            <button id="send" type="button">Send</button>
+        </div>
+
+        <div class="hint">Please don't enter passwords or sensitive personal information.</div>
+    </main>
+
+    <script>
+        const messages = document.getElementById("messages");
+        const questionInput = document.getElementById("question");
+        const sendButton = document.getElementById("send");
+
+        function addMessage(text, type) {
+            const element = document.createElement("div");
+            element.className = "message " + type;
+            element.textContent = text;
+            messages.appendChild(element);
+            messages.scrollTop = messages.scrollHeight;
+            return element;
+        }
+
+        async function sendMessage() {
+            const message = questionInput.value.trim();
+
+            if (!message) {
+                questionInput.focus();
+                return;
+            }
+
+            if (message.length > 500) {
+                addMessage("Please keep your message within 500 characters.", "bot");
+                return;
+            }
+
+            addMessage(message, "user");
+            questionInput.value = "";
+            sendButton.disabled = true;
+            questionInput.disabled = true;
+
+            const loading = addMessage("Thinking...", "bot");
+
+            try {
+                const response = await fetch("/api/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message })
+                });
+
+                const data = await response.json();
+                loading.remove();
+
+                if (!response.ok) {
+                    addMessage(data.error || "Something went wrong.", "bot");
+                    return;
+                }
+
+                const reply = addMessage(data.answer || "No answer was returned.", "bot");
+
+                if (data.faq_ids && data.faq_ids.length) {
+                    const refs = document.createElement("div");
+                    refs.className = "references";
+                    refs.textContent = "Related FAQ references: " + data.faq_ids.join(", ");
+                    reply.appendChild(refs);
+                }
+
+                const feedback = document.createElement("div");
+                feedback.className = "feedback";
+
+                [["👍 Helpful", "up"], ["👎 Not helpful", "down"]].forEach(([label, rating]) => {
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.textContent = label;
+
+                    button.addEventListener("click", async () => {
+                        button.disabled = true;
+
+                        try {
+                            const result = await fetch("/api/feedback", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                    rating,
+                                    intent: data.intent || "unknown",
+                                    faq_ids: data.faq_ids || []
+                                })
+                            });
+
+                            if (!result.ok) {
+                                button.disabled = false;
+                                addMessage("Feedback could not be saved. Please try again.", "bot");
+                                return;
+                            }
+
+                            feedback.textContent = "Thank you for your feedback!";
+                        } catch (error) {
+                            button.disabled = false;
+                            addMessage("Could not submit feedback. Please try again.", "bot");
+                        }
+                    });
+
+                    feedback.appendChild(button);
+                });
+
+                reply.appendChild(feedback);
+                messages.scrollTop = messages.scrollHeight;
+
+            } catch (error) {
+                loading.remove();
+                addMessage("Unable to reach the server. Please try again.", "bot");
+            } finally {
+                sendButton.disabled = false;
+                questionInput.disabled = false;
+                questionInput.focus();
+            }
+        }
+
+        sendButton.addEventListener("click", sendMessage);
+
+        questionInput.addEventListener("keydown", event => {
+            if (event.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+</html>
