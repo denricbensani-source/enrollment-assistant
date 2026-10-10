@@ -5,8 +5,34 @@ import pickle
 import re
 from collections import Counter
 from flask import Flask, jsonify, request, render_template
+import secrets
+from flask import Response
 
 app = Flask(__name__)
+
+def admin_auth_required():
+    username = os.getenv("ADMIN_USERNAME")
+    password = os.getenv("ADMIN_PASSWORD")
+    auth = request.authorization
+
+    if not username or not password:
+        return False
+
+    return (
+        auth is not None
+        and secrets.compare_digest(auth.username or "", username)
+        and secrets.compare_digest(auth.password or "", password)
+    )
+
+
+def require_admin():
+    if not admin_auth_required():
+        return Response(
+            "Login required. Please provide valid admin credentials.",
+            401,
+            {"WWW-Authenticate": 'Basic realm="Enrollment Admin"'},
+        )
+    return None
 
 # Load FAQ knowledge base
 with open("data/faq.json", encoding="utf-8") as file:
@@ -183,6 +209,10 @@ def feedback():
 
 @app.route("/api/stats", methods=["GET"])
 def stats():
+    auth_error = require_admin()
+    if auth_error:
+        return auth_error
+
     feedback_file = "data/feedback.jsonl"
     ratings = {"up": 0, "down": 0}
     intents = {}
@@ -214,6 +244,10 @@ def stats():
 
 @app.route("/admin")
 def admin():
+    auth_error = require_admin()
+    if auth_error:
+        return auth_error
+
     return """
     <!DOCTYPE html>
     <html lang="en">
